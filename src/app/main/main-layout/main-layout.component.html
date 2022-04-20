@@ -1,0 +1,145 @@
+<!-- ================================ Header ================================-->
+<div class="placeholder">
+  <div
+    class="parallax-window"
+    data-parallax="scroll"
+    style="
+      background: url(assets/simple-house-01.jpg) no-repeat;
+      background-size: cover;
+    "
+  >
+    <div class="tm-header">
+      <div class="row tm-header-inner">
+        <div class="col-md-6 col-12">
+          <a routerLink="/"
+            ><img
+              src="./assets/logo.png"
+              alt="Logo"
+              class="tm-site-logo"
+              style="width: 60px; height: 60px"
+          /></a>
+
+          <!-- <div class="tm-site-text-box">
+            <h1 class="tm-site-title">Simple House</h1>
+            <h6 class="tm-site-description">new restaurant template</h6>
+          </div> -->
+        </div>
+
+        <!-- view khi chưa đăng nhập -->
+        <nav
+          class="col-md-6 col-12 tm-nav"
+          *ngIf="!currentUser; else loginTemplate"
+        >
+          <ul class="tm-nav-ul">
+            <li class="tm-nav-li">
+              <a routerLink="/" class="tm-nav-link active">Trang chủ</a>
+            </li>
+            <li class="tm-nav-li">
+              <a routerLink="/store" class="tm-nav-link">Cửa hàng</a>
+            </li>
+            <li class="tm-nav-li">
+              <a routerLink="/login" class="tm-nav-link">Đăng nhập</a>
+            </li>
+            <li class="tm-nav-li">
+              <a routerLink="/signup" class="tm-nav-link">Đăng kí</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- view khi đă đăng nhập -->
+        <ng-template #loginTemplate>
+          <nav class="col-md-6 col-12 tm-nav">
+            <ul class="tm-nav-ul">
+              <li class="tm-nav-li">
+                <div class="dropdown">
+                  <i
+                    class="fa fa-user"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-expanded="false"
+                    style="font-size: 25px; cursor: pointer"
+                  ></i>
+
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a class="dropdown-item" routerLink="/status-order"
+                      >Tình trạng đơn hàng</a
+                    >
+                    <a
+                      class="dropdown-item"
+                      routerLink="/update-profile/{{userId}"
+                      >Cập nhật thông tin</a
+                    >
+                    <a class="dropdown-item" (click)="logOut()">Đăng xuất</a>
+                  </div>
+                </div>
+              </li>
+              <li class="tm-nav-li">
+                <a routerLink="/" class="tm-nav-link active">Trang chủ</a>
+              </li>
+              <li class="tm-nav-li">
+                <a routerLink="/store" class="tm-nav-link">Cửa hàng</a>
+              </li>
+              <li class="tm-nav-li">
+                <a routerLink="/cart" class="tm-nav-link">Giỏ hàng(0)</a>
+              </li>
+            </ul>
+          </nav>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- -------------x------------- Header --------------------x------------------- -->
+
+<router-outlet></router-outlet>
+
+<!-- --------------------------- Footer ---------------------------------------- -->
+<footer class="footer">
+  <div class="container">
+    <div class="about-us">
+      <h3>About us</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+        quia atque nemo ad modi officiis iure, autem nulla tenetur repellendus.
+      </p>
+    </div>
+    <div class="newsletter">
+      <h3>Newsletter</h3>
+      <p>Stay update with our latest</p>
+      <div class="form-element">
+        <input type="text" placeholder="Email" /><span
+          ><i class="fas fa-chevron-right"></i
+        ></span>
+      </div>
+    </div>
+    <div class="instagram">
+      <h3>Instagram</h3>
+      <div class="flex-row">
+        <img src="./assets/instagram/thumb-card3.png" alt="insta1" />
+        <img src="./assets/instagram/thumb-card4.png" alt="insta2" />
+        <img src="./assets/instagram/thumb-card5.png" alt="insta3" />
+      </div>
+      <div class="flex-row">
+        <img src="./assets/instagram/thumb-card6.png" alt="insta4" />
+        <img src="./assets/instagram/thumb-card7.png" alt="insta5" />
+        <img src="./assets/instagram/thumb-card8.png" alt="insta6" />
+      </div>
+    </div>
+    <div class="follow">
+      <h3>Follow us</h3>
+      <p>Let us be Social</p>
+      <div>
+        <i class="fab fa-facebook-f"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-youtube"></i>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- -------------x------------- Footer --------------------x------------------- -->

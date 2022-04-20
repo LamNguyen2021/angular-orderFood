@@ -1,0 +1,17 @@
+.addOrder {
+  margin: 10px 0;
+}
+
+.table > thead > tr > th {
+  border-bottom-width: 1px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.updateOrder {
+  margin-right: 7px;
+}
+
+.deleteOrder {
+  margin-left: 7px;
+}

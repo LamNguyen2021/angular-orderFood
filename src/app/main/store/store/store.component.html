@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <article
+      class="col-lg-3 col-md-4 tm-gallery-item"
+      *ngFor="let store of listStore"
+    >
+      <figure>
+        <img
+          src="{{ store.imageUrl }}"
+          alt="Image"
+          class="img-fluid tm-gallery-img"
+          style="height: 160px"
+        />
+        <figcaption>
+          <h4 class="tm-gallery-title">{{ store.name }}</h4>
+          <p class="tm-gallery-description">{{ store.address }}</p>
+          <button
+            class="tm-gallery-button"
+            routerLink="/store/{{ store.id }}/foods"
+          >
+            Xem chi tiết
+          </button>
+        </figcaption>
+      </figure>
+    </article>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+.addStore {
+  margin: 10px 0;
+}
+
+.table > thead > tr > th {
+  border-bottom-width: 1px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.btn {
+  margin: 0 7px;
+}
+
+.form-container {
+  margin: 60px 0;
+  width: 50%;
+}
+
+.validate {
+  color: red;
+  font-size: 12px;
+}

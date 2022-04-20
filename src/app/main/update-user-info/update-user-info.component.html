@@ -1,0 +1,182 @@
+<div class="container">
+  <form [formGroup]="updateUserForm" (ngSubmit)="handleUpdateUser()">
+    <div class="form-group">
+      <label for="hoTen">Họ tên</label>
+      <input
+        type="text"
+        class="form-control"
+        id="hoTen"
+        formControlName="fullname"
+      />
+      <!-- validate ho ten -->
+      <div
+        class="validate"
+        *ngIf="
+          updateUserForm.get('fullname').invalid &&
+          (updateUserForm.get('fullname').touched ||
+            updateUserForm.get('fullname').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="updateUserForm.get('fullname').errors.required"
+          >*Vui lòng nhập họ tên</span
+        >
+        <span
+          class="error"
+          *ngIf="updateUserForm.get('fullname').errors.minlength"
+          >*Họ tên phải từ 5 kí tự</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        formControlName="username"
+      />
+      <!-- validate username -->
+      <div
+        class="validate"
+        *ngIf="
+          updateUserForm.get('username').invalid &&
+          (updateUserForm.get('username').touched ||
+            updateUserForm.get('username').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="updateUserForm.get('username').errors.required"
+          >*Vui lòng nhập username</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            updateUserForm.get('username').errors.minlength ||
+            updateUserForm.get('username').errors.maxlength
+          "
+          >*Username phải từ 5->20 kí tự</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Mật khẩu</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+      />
+      <!-- validate password -->
+      <div
+        class="validate"
+        *ngIf="
+          updateUserForm.get('password').invalid &&
+          (updateUserForm.get('password').touched ||
+            updateUserForm.get('password').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="updateUserForm.get('password').errors.required"
+          >*Vui lòng nhập mật khẩu</span
+        >
+        <span
+          class="error"
+          *ngIf="updateUserForm.get('password').errors.minlength"
+          >*Mật khẩu ít nhất 4 kí tự</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="diaChi">Địa chỉ</label>
+      <input
+        type="text"
+        class="form-control"
+        id="diaChi"
+        formControlName="address"
+      />
+      <!-- validate địa chỉ -->
+      <div
+        class="validate"
+        *ngIf="
+          updateUserForm.get('address').invalid &&
+          (updateUserForm.get('address').touched ||
+            updateUserForm.get('address').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="updateUserForm.get('address').errors.required"
+          >*Vui lòng nhập địa chỉ</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="sdt">Số điên thoại</label>
+      <input
+        type="number"
+        class="form-control"
+        id="sdt"
+        formControlName="phone"
+      />
+      <!-- validate password -->
+      <div
+        class="validate"
+        *ngIf="
+          updateUserForm.get('phone').invalid &&
+          (updateUserForm.get('phone').touched ||
+            updateUserForm.get('phone').dirty)
+        "
+      >
+        <span class="error" *ngIf="updateUserForm.get('phone').errors.required"
+          >*Vui lòng nhập số điện thoại</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            updateUserForm.get('phone').errors.minlength ||
+            updateUserForm.get('phone').errors.maxlength
+          "
+          >*Số điện thoại phải có 10 chữ số</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+      <!-- validate email -->
+      <div
+        class="validate"
+        *ngIf="
+          updateUserForm.get('email').invalid &&
+          (updateUserForm.get('email').touched ||
+            updateUserForm.get('email').dirty)
+        "
+      >
+        <span class="error" *ngIf="updateUserForm.get('email').errors.required"
+          >*Vui lòng nhập email</span
+        >
+        <span class="error" *ngIf="updateUserForm.get('email').errors.pattern"
+          >*Email không đúng định dạng. VD: example@gmail.com</span
+        >
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="updateUserForm.invalid || loading"
+    >
+      Cập nhật
+    </button>
+  </form>
+</div>
+
+{{ updateUserForm.value | json }}

@@ -1,0 +1,10 @@
+.tm-welcome-section {
+  margin: 60px auto;
+  max-width: 655px;
+}
+
+.tm-section-title {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 30px;
+}

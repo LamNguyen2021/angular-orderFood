@@ -1,0 +1,238 @@
+<div class="form-container">
+  <form [formGroup]="createUserForm" (ngSubmit)="handleCreateUser()">
+    <div class="form-group">
+      <label for="name">Họ tên</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        autocomplete="off"
+      />
+      <!-- validate ho ten -->
+      <div
+        class="validate"
+        *ngIf="
+          createUserForm.get('name').invalid &&
+          (createUserForm.get('name').touched ||
+            createUserForm.get('name').dirty)
+        "
+      >
+        <span class="error" *ngIf="createUserForm.get('name').errors.required"
+          >*Vui lòng nhập họ tên</span
+        >
+        <span class="error" *ngIf="createUserForm.get('name').errors.minlength"
+          >*Họ tên phải từ 5 kí tự</span
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        formControlName="username"
+        autocomplete="off"
+      />
+      <!-- validate username -->
+      <div
+        class="validate"
+        *ngIf="
+          createUserForm.get('username').invalid &&
+          (createUserForm.get('username').touched ||
+            createUserForm.get('username').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createUserForm.get('username').errors.required"
+          >*Vui lòng nhập username</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            createUserForm.get('username').errors.minlength ||
+            createUserForm.get('username').errors.maxlength
+          "
+          >*Username phải từ 5->20 kí tự</span
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+        autocomplete="off"
+      />
+      <!-- validate password -->
+      <div
+        class="validate"
+        *ngIf="
+          createUserForm.get('password').invalid &&
+          (createUserForm.get('password').touched ||
+            createUserForm.get('password').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createUserForm.get('password').errors.required"
+          >*Vui lòng nhập mật khẩu</span
+        >
+        <span
+          class="error"
+          *ngIf="createUserForm.get('password').errors.minlength"
+          >*Mật khẩu ít nhất 4 kí tự</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="diaChi">Địa chỉ</label>
+      <input
+        type="text"
+        class="form-control"
+        id="diaChi"
+        formControlName="address"
+        autocomplete="off"
+      />
+      <!-- validate địa chỉ -->
+      <div
+        class="validate"
+        *ngIf="
+          createUserForm.get('address').invalid &&
+          (createUserForm.get('address').touched ||
+            createUserForm.get('address').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createUserForm.get('address').errors.required"
+          >*Vui lòng nhập địa chỉ</span
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="sdt">Số điện thoại</label>
+      <input
+        type="number"
+        class="form-control"
+        id="sdt"
+        formControlName="phone"
+        autocomplete="off"
+      />
+      <!-- validate phone -->
+      <div
+        class="validate"
+        *ngIf="
+          createUserForm.get('phone').invalid &&
+          (createUserForm.get('phone').touched ||
+            createUserForm.get('phone').dirty)
+        "
+      >
+        <span class="error" *ngIf="createUserForm.get('phone').errors.required"
+          >*Vui lòng nhập số điện thoại</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            createUserForm.get('phone').errors.minlength ||
+            createUserForm.get('phone').errors.maxlength
+          "
+          >*Số điện thoại phải có 10 chữ số</span
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="Email"
+        formControlName="email"
+        autocomplete="off"
+      />
+      <!-- validate email -->
+      <div
+        class="validate"
+        *ngIf="
+          createUserForm.get('email').invalid &&
+          (createUserForm.get('email').touched ||
+            createUserForm.get('email').dirty)
+        "
+      >
+        <span class="error" *ngIf="createUserForm.get('email').errors.required"
+          >*Vui lòng nhập email</span
+        >
+        <span class="error" *ngIf="createUserForm.get('email').errors.pattern"
+          >*Email không đúng định dạng. VD: example@gmail.com</span
+        >
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="createUserForm.invalid || loading"
+    >
+      Tạo User
+    </button>
+  </form>
+</div>
+
+<h3 style="margin: 20px 0">Danh sách cửa hàng</h3>
+<table class="table table-hover">
+  <thead class="text-primary">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Salary</th>
+      <th>Country</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Bob Williams</td>
+      <td>$23,566</td>
+      <td>USA</td>
+      <td>
+        <button type="button" class="btn btn-success updateUser">
+          Success
+        </button>
+        <button type="button" class="btn btn-danger deleteUser">Danger</button>
+      </td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Bob Williams</td>
+      <td>$23,566</td>
+      <td>USA</td>
+      <td>
+        <button type="button" class="btn btn-success updateUser">
+          Success
+        </button>
+        <button type="button" class="btn btn-danger deleteUser">Danger</button>
+      </td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Bob Williams</td>
+      <td>$23,566</td>
+      <td>USA</td>
+      <td>
+        <button type="button" class="btn btn-success updateUser">
+          Success
+        </button>
+        <button type="button" class="btn btn-danger deleteUser">Danger</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,57 @@
+.food {
+  margin-top: 80px;
+}
+
+.container {
+  width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 80px;
+}
+
+.row {
+  justify-content: center;
+}
+
+.tm-gallery-item {
+  margin-bottom: 60px;
+  margin-left: 25px;
+  margin-right: 25px;
+  padding: 0;
+  width: 300px;
+}
+
+.tm-gallery-item .tm-gallery-img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.tm-gallery-title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #1a6692;
+  margin-bottom: 15px;
+}
+
+.tm-gallery-description {
+  margin-bottom: 20px;
+}
+
+.tm-gallery-price {
+  font-size: 1.25rem;
+  color: #2f956d;
+}
+
+.tm-gallery-button {
+  display: inline-block;
+  border: 1px solid #2f956d;
+  color: #2f956d;
+  background-color: transparent;
+  padding: 10px 30px;
+  width: 100%;
+}
+
+.tm-gallery-button:hover {
+  background-color: #2f956d;
+  color: white;
+}

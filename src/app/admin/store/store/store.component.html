@@ -1,0 +1,170 @@
+<div class="form-container">
+  <form [formGroup]="createStoreForm" (ngSubmit)="handleCreateForm()">
+    <div class="form-group">
+      <label for="tenCuaHang">Tên cửa hàng</label>
+      <input
+        type="text"
+        class="form-control"
+        id="tenCuaHang"
+        formControlName="tenCuaHang"
+        autocomplete="off"
+      />
+      <!-- validate ten cua hang -->
+      <div
+        class="validate"
+        *ngIf="
+          createStoreForm.get('tenCuaHang').invalid &&
+          (createStoreForm.get('tenCuaHang').touched ||
+            createStoreForm.get('tenCuaHang').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createStoreForm.get('tenCuaHang').errors.required"
+          >*Vui lòng nhập tên cửa hàng</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="moTa">Mô tả</label>
+      <input
+        type="text"
+        class="form-control"
+        id="moTa"
+        formControlName="moTa"
+        autocomplete="off"
+      />
+      <!-- validate mo ta -->
+      <div
+        class="validate"
+        *ngIf="
+          createStoreForm.get('moTa').invalid &&
+          (createStoreForm.get('moTa').touched ||
+            createStoreForm.get('moTa').dirty)
+        "
+      >
+        <span class="error" *ngIf="createStoreForm.get('moTa').errors.required"
+          >*Vui lòng nhập mô tả</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="diaChi">Địa chỉ</label>
+      <input
+        type="text"
+        class="form-control"
+        id="diaChi"
+        formControlName="diaChi"
+        autocomplete="off"
+      />
+      <!-- validate địa chỉ -->
+      <div
+        class="validate"
+        *ngIf="
+          createStoreForm.get('diaChi').invalid &&
+          (createStoreForm.get('diaChi').touched ||
+            createStoreForm.get('diaChi').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createStoreForm.get('diaChi').errors.required"
+          >*Vui lòng nhập địa chỉ</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="hinhAnh">Đường dẫn hình ảnh đại diện</label>
+      <input
+        type="text"
+        class="form-control"
+        id="hinhAnh"
+        formControlName="duongDanHinhAnh"
+        autocomplete="off"
+      />
+      <!-- validate image -->
+      <div
+        class="validate"
+        *ngIf="
+          createStoreForm.get('duongDanHinhAnh').invalid &&
+          (createStoreForm.get('duongDanHinhAnh').touched ||
+            createStoreForm.get('duongDanHinhAnh').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createStoreForm.get('duongDanHinhAnh').errors.required"
+          >*Vui lòng nhập đường dẫn</span
+        >
+      </div>
+    </div>
+
+    <!-- location -->
+    <div class="form-group">
+      <input
+        type="hidden"
+        class="form-control"
+        formControlName="location"
+        autocomplete="off"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="createStoreForm.invalid || loading"
+    >
+      Tạo cửa hàng mới
+    </button>
+  </form>
+</div>
+
+<h3 style="margin: 20px 0">Danh sách cửa hàng</h3>
+<table class="table table-hover">
+  <thead class="text-primary">
+    <tr>
+      <th>Tên cửa hàng</th>
+      <th>Mô tả</th>
+      <th>Địa chỉ</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let store of listStore">
+      <td width="20%">{{ store.name }}</td>
+      <td width="20%">{{ store.description }}</td>
+      <td width="40%">{{ store.address }}</td>
+      <td width="20%">
+        <button
+          type="button"
+          class="btn btn-info"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Xem chi tiết"
+        >
+          <i class="material-icons">remove_red_eye</i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-warning"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Chỉnh sửa"
+          (click)="handleEditStore(store.id)"
+        >
+          <i class="material-icons">mode_edit</i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Xóa"
+          (click)="handleDeleteStore(store.id)"
+        >
+          <i class="material-icons">delete</i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

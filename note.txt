@@ -1,0 +1,10 @@
+1. Anh sửa lại quyền API:
+	- get all user (admin)
+	- get user by id (admin, user)
+ 	- update user (admin, user)
+	- delete user (admin)
+2. Làm phần: Giỏ hàng, trạng thái đơn hàng 
+3. Bỏ phân trang API: get all store
+
+
+Ghi chú: anh xem code e viết rồi viết giống vậy nha. Đừng viết theo cách của a. E không hiểu đâu

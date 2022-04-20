@@ -1,0 +1,60 @@
+<div class="login-page">
+  <div class="form">
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+      <input
+        type="text"
+        placeholder="username"
+        formControlName="username"
+        autocomplete="off"
+      />
+      <!-- validate username -->
+      <div
+        class="validate"
+        *ngIf="
+          loginForm.get('username').invalid &&
+          (loginForm.get('username').touched || loginForm.get('username').dirty)
+        "
+      >
+        <span class="error" *ngIf="loginForm.get('username').errors.required"
+          >*Vui lòng nhập username</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            loginForm.get('username').errors.minlength ||
+            loginForm.get('username').errors.maxlength
+          "
+          >*username từ 5->20 kí tự</span
+        >
+      </div>
+      <input
+        type="password"
+        placeholder="password"
+        formControlName="password"
+        autocomplete="off"
+      />
+      <!-- validate password -->
+      <div
+        class="validate"
+        *ngIf="
+          loginForm.get('password').invalid &&
+          (loginForm.get('password').touched || loginForm.get('password').dirty)
+        "
+      >
+        <span class="error" *ngIf="loginForm.get('password').errors.required"
+          >*Vui lòng nhập mật khẩu</span
+        >
+        <span class="error" *ngIf="loginForm.get('password').errors.minlength"
+          >*Mật khẩu ít nhất 4 kí tự</span
+        >
+      </div>
+      <button [disabled]="loginForm.invalid || loading">login</button>
+      <p class="message">
+        Not registered? <a routerLink="/signup">Create an account</a>
+      </p>
+      <p class="return">
+        <a routerLink="/"><i class="fa fa-arrow-left"></i> Return home</a>
+      </p>
+    </form>
+  </div>
+</div>

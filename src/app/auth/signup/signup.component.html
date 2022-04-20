@@ -1,0 +1,136 @@
+<div class="login-page">
+  <div class="form">
+    <form
+      class="register-form"
+      [formGroup]="signUpForm"
+      (ngSubmit)="handleSignUp()"
+    >
+      <input type="text" placeholder="Họ tên" formControlName="name" />
+      <!-- validate ho ten -->
+      <div
+        class="validate"
+        *ngIf="
+          signUpForm.get('name').invalid &&
+          (signUpForm.get('name').touched || signUpForm.get('name').dirty)
+        "
+      >
+        <span class="error" *ngIf="signUpForm.get('name').errors.required"
+          >*Vui lòng nhập họ tên</span
+        >
+        <span class="error" *ngIf="signUpForm.get('name').errors.minlength"
+          >*Họ tên phải từ 5 kí tự</span
+        >
+      </div>
+
+      <input type="text" placeholder="username" formControlName="username" />
+      <!-- validate username -->
+      <div
+        class="validate"
+        *ngIf="
+          signUpForm.get('username').invalid &&
+          (signUpForm.get('username').touched ||
+            signUpForm.get('username').dirty)
+        "
+      >
+        <span class="error" *ngIf="signUpForm.get('username').errors.required"
+          >*Vui lòng nhập username</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            signUpForm.get('username').errors.minlength ||
+            signUpForm.get('username').errors.maxlength
+          "
+          >*Username phải từ 5->20 kí tự</span
+        >
+      </div>
+
+      <input
+        type="password"
+        placeholder="Mật khẩu"
+        formControlName="password"
+      />
+      <!-- validate password -->
+      <div
+        class="validate"
+        *ngIf="
+          signUpForm.get('password').invalid &&
+          (signUpForm.get('password').touched ||
+            signUpForm.get('password').dirty)
+        "
+      >
+        <span class="error" *ngIf="signUpForm.get('password').errors.required"
+          >*Vui lòng nhập mật khẩu</span
+        >
+        <span class="error" *ngIf="signUpForm.get('password').errors.minlength"
+          >*Mật khẩu ít nhất 4 kí tự</span
+        >
+      </div>
+
+      <input type="text" placeholder="Địa chỉ" formControlName="address" />
+      <!-- validate địa chỉ -->
+      <div
+        class="validate"
+        *ngIf="
+          signUpForm.get('address').invalid &&
+          (signUpForm.get('address').touched || signUpForm.get('address').dirty)
+        "
+      >
+        <span class="error" *ngIf="signUpForm.get('address').errors.required"
+          >*Vui lòng nhập địa chỉ</span
+        >
+      </div>
+
+      <input
+        type="number"
+        placeholder="Số điện thoại"
+        formControlName="phone"
+      />
+      <!-- validate phone -->
+      <div
+        class="validate"
+        *ngIf="
+          signUpForm.get('phone').invalid &&
+          (signUpForm.get('phone').touched || signUpForm.get('phone').dirty)
+        "
+      >
+        <span class="error" *ngIf="signUpForm.get('phone').errors.required"
+          >*Vui lòng nhập số điện thoại</span
+        >
+        <span
+          class="error"
+          *ngIf="
+            signUpForm.get('phone').errors.minlength ||
+            signUpForm.get('phone').errors.maxlength
+          "
+          >*Số điện thoại phải có 10 chữ số</span
+        >
+      </div>
+
+      <input type="email" placeholder="Email" formControlName="email" />
+      <!-- validate email -->
+      <div
+        class="validate"
+        *ngIf="
+          signUpForm.get('email').invalid &&
+          (signUpForm.get('email').touched || signUpForm.get('email').dirty)
+        "
+      >
+        <span class="error" *ngIf="signUpForm.get('email').errors.required"
+          >*Vui lòng nhập email</span
+        >
+        <span class="error" *ngIf="signUpForm.get('email').errors.pattern"
+          >*Email không đúng định dạng. VD: example@gmail.com</span
+        >
+      </div>
+
+      <button [disabled]="signUpForm.invalid || loading">create account</button>
+      <p class="message">
+        Already registered? <a routerLink="/login">Sign In</a>
+      </p>
+      <p class="return">
+        <a routerLink="/"><i class="fa fa-arrow-left"></i> Return home</a>
+      </p>
+    </form>
+  </div>
+</div>

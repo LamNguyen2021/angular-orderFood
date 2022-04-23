@@ -43,4 +43,18 @@ export class StoreService {
     const url = 'http://localhost:8080/api/v1/store';
     return this.http.post<CreateStoreResponse>(url, values, httpOptions);
   }
+
+  editStore(values: Store, storeId: string) {
+    const token = JSON.parse(localStorage.getItem('user')).data.token;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    const url = `http://localhost:8080/api/v1/store/${storeId}`;
+    return this.http.put(url, values, httpOptions);
+  }
 }

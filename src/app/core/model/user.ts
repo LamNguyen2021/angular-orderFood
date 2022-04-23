@@ -14,3 +14,9 @@ export interface User {
   email: string;
   username: string;
 }
+
+export interface GetUserResponse {
+  success: boolean;
+  message: string;
+  data: User;
+}

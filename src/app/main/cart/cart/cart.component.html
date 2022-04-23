@@ -27,14 +27,17 @@
                     <th scope="col" class="border-0 bg-light">
                       <div class="py-2 text-uppercase">Remove</div>
                     </th>
+                    <th scope="col" class="border-0 bg-light">
+                      <div class="py-2 text-uppercase">Add</div>
+                    </th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody *ngIf="cart && cart.cartItems">
+                  <tr *ngFor="let cartItem of cart.cartItems">
                     <th scope="row" class="border-0">
                       <div class="p-2">
                         <img
-                          src="https://bootstrapious.com/i/snippets/sn-cart/product-1.jpg"
+                          src="{{ cartItem.foodImageUrl }}"
                           alt=""
                           width="70"
                           class="img-fluid rounded shadow-sm"
@@ -44,84 +47,26 @@
                             <a
                               href="#"
                               class="text-dark d-inline-block align-middle"
-                              >Timex Unisex Originals</a
+                              >{{ cartItem.foodName }}</a
                             >
                           </h5>
-                          <span
-                            class="text-muted font-weight-normal font-italic d-block"
-                            >Category: Watches</span
-                          >
                         </div>
                       </div>
                     </th>
                     <td class="border-0 align-middle">
-                      <strong>$79.00</strong>
+                      <strong>{{ cartItem.price }}</strong>
                     </td>
-                    <td class="border-0 align-middle"><strong>3</strong></td>
                     <td class="border-0 align-middle">
-                      <a href="#" class="text-dark"
+                      <strong>{{ cartItem.quantity }}</strong>
+                    </td>
+                    <td class="border-0 align-middle">
+                      <a (click)="onRemoveItem(cartItem)" class="text-dark"
                         ><i class="fa fa-trash"></i
                       ></a>
                     </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="p-2">
-                        <img
-                          src="https://bootstrapious.com/i/snippets/sn-cart/product-2.jpg"
-                          alt=""
-                          width="70"
-                          class="img-fluid rounded shadow-sm"
-                        />
-                        <div class="ml-3 d-inline-block align-middle">
-                          <h5 class="mb-0">
-                            <a href="#" class="text-dark d-inline-block"
-                              >Lumix camera lense</a
-                            >
-                          </h5>
-                          <span
-                            class="text-muted font-weight-normal font-italic"
-                            >Category: Electronics</span
-                          >
-                        </div>
-                      </div>
-                    </th>
-                    <td class="align-middle"><strong>$79.00</strong></td>
-                    <td class="align-middle"><strong>3</strong></td>
-                    <td class="align-middle">
-                      <a href="#" class="text-dark"
-                        ><i class="fa fa-trash"></i
-                      ></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="p-2">
-                        <img
-                          src="https://bootstrapious.com/i/snippets/sn-cart/product-3.jpg"
-                          alt=""
-                          width="70"
-                          class="img-fluid rounded shadow-sm"
-                        />
-                        <div class="ml-3 d-inline-block align-middle">
-                          <h5 class="mb-0">
-                            <a href="#" class="text-dark d-inline-block"
-                              >Gray Nike running shoe</a
-                            >
-                          </h5>
-                          <span
-                            class="text-muted font-weight-normal font-italic"
-                            >Category: Fashion</span
-                          >
-                        </div>
-                      </div>
-                    </th>
-
-                    <td class="align-middle"><strong>$79.00</strong></td>
-                    <td class="align-middle"><strong>3</strong></td>
-                    <td class="align-middle">
-                      <a href="#" class="text-dark"
-                        ><i class="fa fa-trash"></i
+                    <td class="border-0 align-middle">
+                      <a (click)="onAddItem(cartItem)" class="text-dark"
+                        ><i class="fa fa-plus"></i
                       ></a>
                     </td>
                   </tr>
@@ -193,21 +138,23 @@
               <ul class="list-unstyled mb-4">
                 <li class="d-flex justify-content-between py-3 border-bottom">
                   <strong class="text-muted">Order Subtotal </strong
-                  ><strong>$390.00</strong>
+                  ><strong>{{ totalFood }} VNĐ</strong>
                 </li>
                 <li class="d-flex justify-content-between py-3 border-bottom">
                   <strong class="text-muted">Shipping and handling</strong
-                  ><strong>$10.00</strong>
+                  ><strong>{{ shipping }} VNĐ </strong>
                 </li>
                 <li class="d-flex justify-content-between py-3 border-bottom">
-                  <strong class="text-muted">Tax</strong><strong>$0.00</strong>
+                  <strong class="text-muted">Tax</strong><strong>0.0</strong>
                 </li>
                 <li class="d-flex justify-content-between py-3 border-bottom">
                   <strong class="text-muted">Total</strong>
-                  <h5 class="font-weight-bold">$400.00</h5>
+                  <h5 class="font-weight-bold">{{ totalMoney }} VNĐ</h5>
                 </li>
               </ul>
-              <a href="#" class="btn btn-dark rounded-pill py-2 btn-block"
+              <a
+                (click)="processOrder()"
+                class="btn btn-dark rounded-pill py-2 btn-block"
                 >Procceed to checkout</a
               >
             </div>

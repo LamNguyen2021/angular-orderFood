@@ -14,38 +14,69 @@ export class StoreComponent implements OnInit {
 
   loading = false;
   listStore: Store[] = [];
+  isEditMode: boolean = false;
+  storeDetail: Store;
+  idStore: string = '';
 
   createStoreForm: FormGroup = new FormGroup({
-    tenCuaHang: new FormControl('', Validators.required),
-    moTa: new FormControl('', Validators.required),
-    diaChi: new FormControl('', Validators.required),
-    duongDanHinhAnh: new FormControl('', [Validators.required]),
+    name: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    imageUrl: new FormControl('', [Validators.required]),
     location: new FormControl(''),
   });
 
-  handleEditStore(store: string) {
-    console.log(store);
+  handleViewMore(storeid: string) {
+    this.router.navigateByUrl(`/admin/store/${storeid}/food`);
+  }
+
+  handleEditStore(storeid: string) {
+    this.isEditMode = true;
+    this.idStore = storeid;
+
+    this.getStoreDetail(storeid);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 
   handleCreateForm() {
-    // nếu form chưa được nhập hoặc nhập không đúng thì không xử lý
     if (this.createStoreForm.invalid) {
       return;
     }
 
-    this.loading = true;
-    this.storeService.createStore(this.createStoreForm.value).subscribe({
-      error: (err) => {
-        this.loading = true;
-        console.log(err);
-        this.createStoreForm.reset();
-      },
-      complete: () => {
-        this.loading = false;
-        alert('Tạo thành công');
-        this.createStoreForm.reset();
-      },
-    });
+    if (this.isEditMode) {
+      this.loading = true;
+      this.storeService
+        .editStore(this.createStoreForm.value, this.idStore)
+        .subscribe({
+          error: (err) => {
+            this.loading = true;
+            console.log(err);
+            this.createStoreForm.reset();
+          },
+          complete: () => {
+            this.loading = false;
+            alert('Chỉnh sửa cửa hàng thành công');
+            this.createStoreForm.reset();
+            this.getListStore();
+          },
+        });
+    } else {
+      this.loading = true;
+      this.storeService.createStore(this.createStoreForm.value).subscribe({
+        error: (err) => {
+          this.loading = true;
+          console.log(err);
+          this.createStoreForm.reset();
+        },
+        complete: () => {
+          this.loading = false;
+          alert('Tạo thành công cửa hàng');
+          this.createStoreForm.reset();
+          this.getListStore();
+        },
+      });
+    }
   }
 
   getListStore() {
@@ -53,6 +84,26 @@ export class StoreComponent implements OnInit {
       next: (result) => {
         this.listStore = result.data;
       },
+    });
+  }
+
+  getStoreDetail(storeId: string) {
+    this.storeService.getStoreDetail(storeId).subscribe({
+      next: (result) => {
+        this.createStoreForm.patchValue({
+          name: result.data.name,
+          description: result.data.description,
+          address: result.data.address,
+          imageUrl: result.data.imageUrl,
+          location: result.data.location,
+        });
+      },
+    });
+  }
+
+  editStore(storeId: string) {
+    this.storeService.editStore(this.createStoreForm.value, storeId).subscribe({
+      error: (err) => {},
     });
   }
 

@@ -12,14 +12,6 @@ export class StoreComponent implements OnInit {
 
   constructor(private storeService: StoreService) {}
 
-  handleEditStore(storeId: string) {
-    console.log('storeid', storeId);
-  }
-
-  handleDeleteStore(storeId: string) {
-    console.log('storeid', storeId);
-  }
-
   getListStore() {
     this.storeService.getStoreList().subscribe({
       next: (result) => {

@@ -12,3 +12,19 @@ export interface Food {
   storeId: string;
   price: number;
 }
+
+export interface CreateFoodResponse {
+  success: boolean;
+  message: string;
+  data: idFood;
+}
+
+export interface idFood {
+  id: string;
+}
+
+export interface GetFoodDetailResponse {
+  success: boolean;
+  message: string;
+  data: Food;
+}

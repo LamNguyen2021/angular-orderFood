@@ -1,49 +1,191 @@
-<button type="button" class="btn btn-outline-primary addFood">Add Food</button>
+<div class="store">
+  <h3>Tên cửa hàng: {{ storeDetail.name }}</h3>
+  <p>Mô tả: {{ storeDetail.description }}</p>
+  <p>Địa chỉ: {{ storeDetail.address }}</p>
+</div>
+
+<div class="form-container">
+  <form [formGroup]="createFoodForm" (ngSubmit)="handleCreateForm()">
+    <div class="form-group">
+      <label for="storeId">Id cửa hàng</label>
+      <input
+        type="text"
+        class="form-control"
+        id="storeId"
+        formControlName="storeId"
+        autocomplete="off"
+      />
+      <!-- validate ten mon -->
+      <div
+        class="validate"
+        *ngIf="
+          createFoodForm.get('storeId').invalid &&
+          (createFoodForm.get('storeId').touched ||
+            createFoodForm.get('storeId').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createFoodForm.get('storeId').errors.required"
+          >*Vui lòng nhập id</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name">Tên món ăn</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        autocomplete="off"
+      />
+      <!-- validate ten mon -->
+      <div
+        class="validate"
+        *ngIf="
+          createFoodForm.get('name').invalid &&
+          (createFoodForm.get('name').touched ||
+            createFoodForm.get('name').dirty)
+        "
+      >
+        <span class="error" *ngIf="createFoodForm.get('name').errors.required"
+          >*Vui lòng nhập tên món ăn</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Mô tả</label>
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        formControlName="description"
+        autocomplete="off"
+      />
+      <!-- validate mo ta -->
+      <div
+        class="validate"
+        *ngIf="
+          createFoodForm.get('description').invalid &&
+          (createFoodForm.get('description').touched ||
+            createFoodForm.get('description').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createFoodForm.get('description').errors.required"
+          >*Vui lòng nhập mô tả</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">Đường dẫn hình ảnh</label>
+      <input
+        type="text"
+        class="form-control"
+        id="imageUrl"
+        formControlName="imageUrl"
+        autocomplete="off"
+      />
+      <!-- validate image url -->
+      <div
+        class="validate"
+        *ngIf="
+          createFoodForm.get('imageUrl').invalid &&
+          (createFoodForm.get('imageUrl').touched ||
+            createFoodForm.get('imageUrl').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createFoodForm.get('imageUrl').errors.required"
+          >*Vui lòng nhập đường dẫn hình ảnh</span
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="gia">Giá</label>
+      <input
+        type="text"
+        class="form-control"
+        id="gia"
+        formControlName="price"
+        autocomplete="off"
+      />
+      <!-- validate price -->
+      <div
+        class="validate"
+        *ngIf="
+          createFoodForm.get('price').invalid &&
+          (createFoodForm.get('price').touched ||
+            createFoodForm.get('price').dirty)
+        "
+      >
+        <span class="error" *ngIf="createFoodForm.get('price').errors.required"
+          >*Vui lòng nhập giá</span
+        >
+      </div>
+    </div>
+
+    <span *ngIf="isEditMode; else createButton">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="createFoodForm.invalid || loading"
+      >
+        Chỉnh sửa
+      </button>
+    </span>
+
+    <ng-template #createButton>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="createFoodForm.invalid || loading"
+      >
+        Tạo mới
+      </button>
+    </ng-template>
+  </form>
+</div>
+
+<h3 style="margin-top: 15px">Danh sách các món ăn của cửa hàng</h3>
 <table class="table table-hover">
   <thead class="text-primary">
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Salary</th>
-      <th>Country</th>
+      <th>Tên món</th>
+      <th>Mô tả</th>
+      <th>Giá</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>Bob Williams</td>
-      <td>$23,566</td>
-      <td>USA</td>
-      <td>
-        <button type="button" class="btn btn-success updateFood">
-          Success
+    <tr *ngFor="let food of listFood">
+      <td width="40%">{{ food.name }}</td>
+      <td width="20%">{{ food.description }}</td>
+      <td width="20%">{{ food.price }}</td>
+      <td width="20%">
+        <button
+          type="button"
+          class="btn btn-warning"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Chỉnh sửa"
+          (click)="handleEditFood(food.id)"
+        >
+          <i class="material-icons">mode_edit</i>
         </button>
-        <button type="button" class="btn btn-danger deleteFood">Danger</button>
-      </td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Bob Williams</td>
-      <td>$23,566</td>
-      <td>USA</td>
-      <td>
-        <button type="button" class="btn btn-success updateFood">
-          Success
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Xóa"
+        >
+          <i class="material-icons">delete</i>
         </button>
-        <button type="button" class="btn btn-danger deleteFood">Danger</button>
-      </td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Bob Williams</td>
-      <td>$23,566</td>
-      <td>USA</td>
-      <td>
-        <button type="button" class="btn btn-success updateFood">
-          Success
-        </button>
-        <button type="button" class="btn btn-danger deleteFood">Danger</button>
       </td>
     </tr>
   </tbody>

@@ -1,74 +1,74 @@
 <div class="form-container">
   <form [formGroup]="createStoreForm" (ngSubmit)="handleCreateForm()">
     <div class="form-group">
-      <label for="tenCuaHang">Tên cửa hàng</label>
+      <label for="name">Tên cửa hàng</label>
       <input
         type="text"
         class="form-control"
-        id="tenCuaHang"
-        formControlName="tenCuaHang"
+        id="name"
+        formControlName="name"
         autocomplete="off"
       />
       <!-- validate ten cua hang -->
       <div
         class="validate"
         *ngIf="
-          createStoreForm.get('tenCuaHang').invalid &&
-          (createStoreForm.get('tenCuaHang').touched ||
-            createStoreForm.get('tenCuaHang').dirty)
+          createStoreForm.get('name').invalid &&
+          (createStoreForm.get('name').touched ||
+            createStoreForm.get('name').dirty)
         "
       >
-        <span
-          class="error"
-          *ngIf="createStoreForm.get('tenCuaHang').errors.required"
+        <span class="error" *ngIf="createStoreForm.get('name').errors.required"
           >*Vui lòng nhập tên cửa hàng</span
         >
       </div>
     </div>
     <div class="form-group">
-      <label for="moTa">Mô tả</label>
+      <label for="description">Mô tả</label>
       <input
         type="text"
         class="form-control"
-        id="moTa"
-        formControlName="moTa"
+        id="description"
+        formControlName="description"
         autocomplete="off"
       />
       <!-- validate mo ta -->
       <div
         class="validate"
         *ngIf="
-          createStoreForm.get('moTa').invalid &&
-          (createStoreForm.get('moTa').touched ||
-            createStoreForm.get('moTa').dirty)
+          createStoreForm.get('description').invalid &&
+          (createStoreForm.get('description').touched ||
+            createStoreForm.get('description').dirty)
         "
       >
-        <span class="error" *ngIf="createStoreForm.get('moTa').errors.required"
+        <span
+          class="error"
+          *ngIf="createStoreForm.get('description').errors.required"
           >*Vui lòng nhập mô tả</span
         >
       </div>
     </div>
     <div class="form-group">
-      <label for="diaChi">Địa chỉ</label>
+      <label for="address">Địa chỉ</label>
       <input
         type="text"
         class="form-control"
-        id="diaChi"
-        formControlName="diaChi"
+        id="address"
+        formControlName="address"
         autocomplete="off"
       />
       <!-- validate địa chỉ -->
       <div
         class="validate"
         *ngIf="
-          createStoreForm.get('diaChi').invalid &&
-          (createStoreForm.get('diaChi').touched ||
-            createStoreForm.get('diaChi').dirty)
+          createStoreForm.get('address').invalid &&
+          (createStoreForm.get('address').touched ||
+            createStoreForm.get('address').dirty)
         "
       >
         <span
           class="error"
-          *ngIf="createStoreForm.get('diaChi').errors.required"
+          *ngIf="createStoreForm.get('address').errors.required"
           >*Vui lòng nhập địa chỉ</span
         >
       </div>
@@ -79,21 +79,21 @@
         type="text"
         class="form-control"
         id="hinhAnh"
-        formControlName="duongDanHinhAnh"
+        formControlName="imageUrl"
         autocomplete="off"
       />
       <!-- validate image -->
       <div
         class="validate"
         *ngIf="
-          createStoreForm.get('duongDanHinhAnh').invalid &&
-          (createStoreForm.get('duongDanHinhAnh').touched ||
-            createStoreForm.get('duongDanHinhAnh').dirty)
+          createStoreForm.get('imageUrl').invalid &&
+          (createStoreForm.get('imageUrl').touched ||
+            createStoreForm.get('imageUrl').dirty)
         "
       >
         <span
           class="error"
-          *ngIf="createStoreForm.get('duongDanHinhAnh').errors.required"
+          *ngIf="createStoreForm.get('imageUrl').errors.required"
           >*Vui lòng nhập đường dẫn</span
         >
       </div>
@@ -109,13 +109,25 @@
       />
     </div>
 
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="createStoreForm.invalid || loading"
-    >
-      Tạo cửa hàng mới
-    </button>
+    <span *ngIf="isEditMode; else createButton">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="createStoreForm.invalid || loading"
+      >
+        Chỉnh sửa
+      </button>
+    </span>
+
+    <ng-template #createButton>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="createStoreForm.invalid || loading"
+      >
+        Tạo mới
+      </button>
+    </ng-template>
   </form>
 </div>
 
@@ -141,6 +153,7 @@
           data-toggle="tooltip"
           data-placement="bottom"
           title="Xem chi tiết"
+          (click)="handleViewMore(store.id)"
         >
           <i class="material-icons">remove_red_eye</i>
         </button>

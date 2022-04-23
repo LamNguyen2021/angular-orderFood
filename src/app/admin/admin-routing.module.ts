@@ -12,7 +12,7 @@ const routes: Routes = [
     component: MainLayoutAdminComponent,
     children: [
       { path: 'order', loadChildren: () => OrderModule },
-      { path: 'food', loadChildren: () => FoodModule },
+      { path: 'store/:storeId/food', loadChildren: () => FoodModule },
       { path: 'store', loadChildren: () => StoreModule },
       { path: '', loadChildren: () => UserModule },
     ],

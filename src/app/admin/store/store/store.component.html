@@ -98,6 +98,56 @@
         >
       </div>
     </div>
+    <div class="form-group">
+      <label for="quantityFood">Số lượng món</label>
+      <input
+        type="number"
+        class="form-control"
+        id="quantityFood"
+        formControlName="quantityFood"
+        autocomplete="off"
+      />
+      <!-- validate so luong mon -->
+      <div
+        class="validate"
+        *ngIf="
+          createStoreForm.get('quantityFood').invalid &&
+          (createStoreForm.get('quantityFood').touched ||
+            createStoreForm.get('quantityFood').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createStoreForm.get('quantityFood').errors.required"
+          >*Vui lòng nhập số lượng món</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="donViTinh">Đơn vị tính</label>
+      <input
+        type="text"
+        class="form-control"
+        id="donViTinh"
+        formControlName="donViTinh"
+        autocomplete="off"
+      />
+      <!-- validate ten cua hang -->
+      <div
+        class="validate"
+        *ngIf="
+          createStoreForm.get('donViTinh').invalid &&
+          (createStoreForm.get('donViTinh').touched ||
+            createStoreForm.get('donViTinh').dirty)
+        "
+      >
+        <span
+          class="error"
+          *ngIf="createStoreForm.get('donViTinh').errors.required"
+          >*Vui lòng nhập đơn vị tính</span
+        >
+      </div>
+    </div>
 
     <!-- location -->
     <div class="form-group">
@@ -138,15 +188,19 @@
       <th>Tên cửa hàng</th>
       <th>Mô tả</th>
       <th>Địa chỉ</th>
+      <th>Số lượng món</th>
+      <th>Đơn vị tính</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let store of listStore">
-      <td width="20%">{{ store.name }}</td>
-      <td width="20%">{{ store.description }}</td>
-      <td width="40%">{{ store.address }}</td>
-      <td width="20%">
+      <td>{{ store.name }}</td>
+      <td>{{ store.description }}</td>
+      <td>{{ store.address }}</td>
+      <td>{{ store.quantityFood }}</td>
+      <td>{{ store.donViTinh }}</td>
+      <td>
         <button
           type="button"
           class="btn btn-info"

@@ -24,6 +24,8 @@ export class StoreComponent implements OnInit {
     address: new FormControl('', Validators.required),
     imageUrl: new FormControl('', [Validators.required]),
     location: new FormControl(''),
+    quantityFood: new FormControl('', Validators.required),
+    donViTinh: new FormControl('', Validators.required),
   });
 
   handleViewMore(storeid: string) {
@@ -40,6 +42,8 @@ export class StoreComponent implements OnInit {
   }
 
   handleCreateForm() {
+    console.log('create store form', this.createStoreForm.value);
+
     if (this.createStoreForm.invalid) {
       return;
     }

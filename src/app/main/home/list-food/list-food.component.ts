@@ -81,6 +81,7 @@ export class ListFoodComponent implements OnInit, OnDestroy {
       (o) => o.foodId === food.id
     );
 
+    // món người dùng thêm là món trong order
     if (foodInLastOrder) {
       foodInLastOrder.quantity = foodInLastOrder.quantity + 1;
     } else {

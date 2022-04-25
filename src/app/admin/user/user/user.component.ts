@@ -25,15 +25,15 @@ export class UserComponent implements OnInit {
 
   createUserForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(20),
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-    ]),
+    // username: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(5),
+    //   Validators.maxLength(20),
+    // ]),
+    // password: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(4),
+    // ]),
     address: new FormControl('', [Validators.required]),
     phone: new FormControl('', [
       Validators.required,
@@ -111,7 +111,7 @@ export class UserComponent implements OnInit {
       next: (result) => {
         this.createUserForm.patchValue({
           name: result.data.name,
-          username: result.data.username,
+          // username: result.data.username,
           address: result.data.address,
           phone: result.data.phone,
           email: result.data.email,

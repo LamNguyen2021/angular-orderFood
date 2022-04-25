@@ -48,3 +48,19 @@ export interface CartItemResponse {
   price: number;
   quantity: number;
 }
+
+export interface StatusOrderResponse {
+  success: boolean;
+  message: string;
+  data: StatusOrder[];
+}
+
+export interface StatusOrder {
+  id: string;
+  userId: string;
+  storeId: string;
+  status: string;
+  totalMoney: number;
+  createDate: Date;
+  orderItems: null;
+}

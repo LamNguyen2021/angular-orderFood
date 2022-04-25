@@ -17,6 +17,8 @@ export interface Store {
   address: string;
   location: string;
   imageUrl: string;
+  quantityFood: number | null;
+  donViTinh: string | null;
 }
 
 export interface CreateStoreResponse {

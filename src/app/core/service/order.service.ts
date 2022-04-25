@@ -78,4 +78,18 @@ export class OrderService {
     const url = 'http://localhost:8080/api/v1/order/cart';
     return this.http.get<any>(url, httpOptions);
   }
+
+  getStatusOrder() {
+    const token = JSON.parse(localStorage.getItem('user')).data.token;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    const url = 'http://localhost:8080/api/v1/order/user';
+    return this.http.get<any>(url, httpOptions);
+  }
 }

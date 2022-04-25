@@ -25,11 +25,11 @@ export class UpdateUserInfoComponent implements OnInit {
 
   updateUserForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    username: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(20),
-    ]),
+    // username: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(5),
+    //   Validators.maxLength(20),
+    // ]),
     // password: new FormControl('', [
     //   Validators.required,
     //   Validators.minLength(4),
@@ -80,7 +80,7 @@ export class UpdateUserInfoComponent implements OnInit {
         this.userService.getUserById(params.userId).subscribe((result) => {
           this.updateUserForm.patchValue({
             name: result.data.name,
-            username: result.data.username,
+            // username: result.data.username,
             address: result.data.address,
             phone: result.data.phone,
             email: result.data.email,

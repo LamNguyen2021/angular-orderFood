@@ -7,6 +7,7 @@ import {
   UpdateOrderRequest,
 } from 'src/app/core/model/order';
 import { OrderService } from 'src/app/core/service/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -18,11 +19,20 @@ export class CartComponent implements OnInit, OnDestroy {
 
   cart: CartResponse = null;
   shipping: number = 20000;
-  totalFood: number = 0;
-  totalMoney: number = 0;
+  totalFood: number = 0; // tiền trước khi cộng ship
+  totalMoney: number = 0; // tiền sau khi cộng ship
   note: string = '';
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private router: Router) {}
+
+  updateTotalMoney() {
+    this.totalFood = 0;
+    this.totalMoney = 0;
+    for (const orderItem of this.cart.cartItems) {
+      this.totalFood = this.totalFood + orderItem.price * orderItem.quantity;
+    }
+    this.totalMoney = this.totalFood + this.shipping;
+  }
 
   ngOnInit(): void {
     this.orderService.getCart().subscribe({
@@ -39,7 +49,7 @@ export class CartComponent implements OnInit, OnDestroy {
       if (cartItem.foodId == element.foodId) {
         cartItem.quantity = cartItem.quantity + 1;
         if (cartItem.quantity > 10) {
-          /* remove item for array */
+          /* cho số lượng tối đa là 10 */
           cartItem.quantity = 10;
         }
       }
@@ -51,8 +61,8 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cart.cartItems.forEach((element) => {
       if (cartItem.foodId == element.foodId) {
         cartItem.quantity = cartItem.quantity - 1;
-        if (cartItem.quantity < 0) {
-          /* remove item for array */
+        if (cartItem.quantity <= 0) {
+          /* xóa luôn món ăn đó khỏi danh sách */
           this.cart.cartItems.splice(this.cart.cartItems.indexOf(cartItem), 1);
         }
       }
@@ -60,18 +70,9 @@ export class CartComponent implements OnInit, OnDestroy {
     this.updateTotalMoney();
   }
 
-  updateTotalMoney() {
-    this.totalFood = 0;
-    this.totalMoney = 0;
-    for (const orderItem of this.cart.cartItems) {
-      this.totalFood = this.totalFood + orderItem.price * orderItem.quantity;
-    }
-    this.totalMoney = this.totalFood + this.shipping;
-  }
-
   processOrder() {
     if (!this.cart.cartItems || this.cart.cartItems.length == 0) {
-      confirm('Vui lòng thêm món ăn');
+      alert('Vui lòng thêm món ăn');
       return;
     }
     const updateOrder = {
@@ -85,6 +86,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.orderService.updateOrder(updateOrder).subscribe(() => {
         alert('add to cart success - update');
+        this.router.navigateByUrl('/status-order');
       })
     );
   }

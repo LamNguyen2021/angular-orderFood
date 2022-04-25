@@ -16,40 +16,41 @@
                 <thead>
                   <tr>
                     <th scope="col" class="border-0 bg-light">
-                      <div class="p-2 px-3 text-uppercase">ID Order</div>
+                      <div class="p-2 px-3 text-uppercase">ID đơn hàng</div>
                     </th>
                     <th scope="col" class="border-0 bg-light">
-                      <div class="py-2 text-uppercase">Toatl Price</div>
+                      <div class="py-2 text-uppercase">Tổng tiền</div>
                     </th>
                     <th scope="col" class="border-0 bg-light">
-                      <div class="py-2 text-uppercase">Status</div>
+                      <div class="py-2 text-uppercase">Ngày tạo</div>
                     </th>
                     <th scope="col" class="border-0 bg-light">
-                      <div class="py-2 text-uppercase">Remove</div>
+                      <div class="py-2 text-uppercase">Tình trạng</div>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr *ngFor="let item of statusOrders">
                     <th scope="row" class="border-0">
                       <div class="p-2">
                         <div class="d-inline-block align-middle">
                           <h5 class="mb-0">
-                            <span class="text-dark d-inline-block align-middle"
-                              >Timex Unisex Originals</span
+                            <span
+                              class="text-dark d-inline-block align-middle"
+                              >{{ item.id }}</span
                             >
                           </h5>
                         </div>
                       </div>
                     </th>
                     <td class="border-0 align-middle">
-                      <strong>$79.00</strong>
+                      <strong>{{ item.totalMoney }}</strong>
                     </td>
-                    <td class="border-0 align-middle"><strong>3</strong></td>
                     <td class="border-0 align-middle">
-                      <a href="#" class="text-dark"
-                        ><i class="fa fa-trash"></i
-                      ></a>
+                      <strong>{{ item.createDate | date: "medium" }}</strong>
+                    </td>
+                    <td class="border-0 align-middle">
+                      <strong>{{ item.status }}</strong>
                     </td>
                   </tr>
                 </tbody>
